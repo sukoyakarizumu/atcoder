@@ -6,20 +6,13 @@ int main() {
   int N, C, K;
   cin >> N >> C >> K;
   vector<int> t = vector<int>(N);
-  for (int i = 0; i < N; i++) {
-    cin >> t.at(i);
-  }
+  for (int i = 0; i < N; i++) cin >> t.at(i);
   sort(t.begin(), t.end());
 
   int busCount = 0;
-  int i = 0;
-  while (i < N) {
-    int firstT = t.at(i);
-    int passengerCount = 0;
-    while (i < N && passengerCount < C && t.at(i) <= firstT + K) {
-      i++;
-      passengerCount++;
-    }
+  for (int i = 0; i < N;) {
+    int start = i;
+    while (i < N && i - start < C && t.at(i) <= t.at(start) + K) i++;
     busCount++;
   }
   cout << busCount << endl;
